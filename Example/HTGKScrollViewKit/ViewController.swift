@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         let items = [item2,item2,item2,item2,item2,item2,item2]
         
         // scrollview
-        let scrollview = HorizontalScrollView.init()
+        let scrollview = HTGKScrollView.init()
         scrollview.backgroundColor = .red
         scrollview.frame = CGRect.init(x: 0, y: 100, width: 414, height: 200)
         scrollview.items = items
@@ -50,13 +50,13 @@ class ViewController: UIViewController {
     
     
 }
-extension ViewController: HorizontalScrollViewDelegate, HorizontalScrollViewDataSource {
-    func horizontalScrollView(_ scrollView: HorizontalScrollView, selectedModel: ItemModelProtocol) {
+extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
+    func htgkScrollView(_ scrollView: HTGKScrollView, selectedModel: ItemModelProtocol) {
         print(selectedModel)
         
     }
     
-    func horizontalScrollView(_ scrollView: HorizontalScrollView, viewForRowAt index: Int) -> ItemViewProtocol {
+    func htgkScrollView(_ scrollView: HTGKScrollView, viewForRowAt index: Int) -> ItemViewProtocol {
         
         return ActivitiesImageView(frame: CGRect.init(x: 0, y: 0, width: 252, height: 120)) as ItemViewProtocol
     }

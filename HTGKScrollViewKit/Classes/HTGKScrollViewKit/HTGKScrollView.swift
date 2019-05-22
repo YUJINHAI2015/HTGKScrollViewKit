@@ -1,5 +1,5 @@
 //
-//  HorizontalScrollView.swift
+//  HTGKScrollView.swift
 //  HeJing
 //
 //  Created by yujinhai on 2019/5/9.
@@ -14,10 +14,10 @@ public enum ScrollViewDirection: Int {
     case horizontal // 水平
 }
 
-public class HorizontalScrollView: UIView {
+public class HTGKScrollView: UIView {
 
-    public weak var delegate: HorizontalScrollViewDelegate?
-    public weak var datasource: HorizontalScrollViewDataSource? {
+    public weak var delegate: HTGKScrollViewDelegate?
+    public weak var datasource: HTGKScrollViewDataSource? {
         didSet {
             // 初始化
             self.commonInit(items: items)
@@ -65,12 +65,12 @@ public class HorizontalScrollView: UIView {
         
         for (index, model) in items.enumerated() {
 
-            let itemViews = self.datasource!.horizontalScrollView(self, viewForRowAt: index)
+            let itemViews = self.datasource!.htgkScrollView(self, viewForRowAt: index)
             
             _scrollView.addSubview(itemViews)
             itemViews.currentItem = model
             itemViews.action = { [weak self](item) in
-                self!.delegate?.horizontalScrollView(self!, selectedModel: item)
+                self!.delegate?.htgkScrollView(self!, selectedModel: item)
             }
             
             itemViews.snp.makeConstraints { (make) in
