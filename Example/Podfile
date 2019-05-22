@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'HTGKScrollViewKit_Example' do
+  pod 'HTGKScrollViewKit', :path => '../'
+
+  target 'HTGKScrollViewKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
