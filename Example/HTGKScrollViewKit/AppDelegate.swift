@@ -7,6 +7,7 @@
 //
 
 import UIKit
+@_exported import HTGKScrollViewKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -1,0 +1,6 @@
+framework module Pods_HTGKScrollViewKit_Tests {
+  umbrella header "Pods-HTGKScrollViewKit_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

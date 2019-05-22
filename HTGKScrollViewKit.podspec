@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'HTGKScrollViewKit'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of HTGKScrollViewKit.'
+  s.summary          = 'HTGKScrollViewKit 一个简单的Scrollview框架'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+需要有两个代理方法，delegate和datasource,传入的数据要支持ItemModelProtocol,传入的UView要支持ItemViewProtocol
                        DESC
 
   s.homepage         = 'https://github.com/YUJINHAI2015/HTGKScrollViewKit'
@@ -39,4 +39,7 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  s.swift_version = '5.0'
+  s.dependency 'SnapKit', '~> 4.2.0'
+
 end
