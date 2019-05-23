@@ -99,5 +99,21 @@ public class HTGKScrollView: UIView {
             }
             make.edges.equalToSuperview()
         }
+        
+        // 更新self
+        if self.scrollViewDirection == .horizontal {
+            if self.frame.size.width == 0 {
+                
+                let frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (previousView?.frame.size.height)!)
+                self.frame = frame
+            }
+        } else {
+            if self.frame.size.width == 0 {
+                
+                let frame = CGRect.init(x: 0, y: 0, width: (previousView?.frame.size.width)!, height: UIScreen.main.bounds.height)
+                self.frame = frame
+            }
+        }
+        
     }
 }

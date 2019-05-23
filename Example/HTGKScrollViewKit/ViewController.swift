@@ -12,8 +12,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let sc = self.scrollView()
-        self.view.addSubview(sc)
         
 //        sc.snp.makeConstraints { (make) in
 //            make.height.equalTo(250)
@@ -26,7 +24,9 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        let sc = self.scrollView()
+        self.view.addSubview(sc)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -38,9 +38,10 @@ class ViewController: UIViewController {
         let items = [item2,item2,item2,item2,item2,item2,item2]
         
         // scrollview
-        let scrollview = HTGKScrollView.init()
+        let scrollview = HTGKScrollView.init(items: items)
+        scrollview.frame = CGRect.init(x: 0, y: 100, width: 400, height: 150)
         scrollview.backgroundColor = .red
-        scrollview.frame = CGRect.init(x: 0, y: 100, width: 414, height: 200)
+        scrollview.scrollViewDirection = .horizontal
         scrollview.items = items
         scrollview.delegate = self
         scrollview.datasource = self
@@ -58,7 +59,7 @@ extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
     
     func htgkScrollView(_ scrollView: HTGKScrollView, viewForRowAt index: Int) -> ItemViewProtocol {
         
-        return ActivitiesImageView(frame: CGRect.init(x: 0, y: 0, width: 252, height: 120)) as ItemViewProtocol
+        return ActivitiesImageView(frame: CGRect.init(x: 0, y: 0, width: 252, height: 150)) as ItemViewProtocol
     }
     
 }
