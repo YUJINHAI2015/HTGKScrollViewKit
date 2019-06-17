@@ -10,7 +10,7 @@ import UIKit
 
 class ActivitiesImageView: UIView {
         
-    private var item: ItemModelProtocol! {
+    private var item: HTGKScrollViewModelProtocol! {
         didSet {
             let data = item as! ServiceItemModel
             self._topImageView.image = data.image
@@ -25,7 +25,7 @@ class ActivitiesImageView: UIView {
         return imageView
     }()
     // MARK: - init
-    required convenience init(modelProtocol: ItemModelProtocol) {
+    required convenience init(modelProtocol: HTGKScrollViewModelProtocol) {
         self.init()
 
         defer {
@@ -62,8 +62,8 @@ class ActivitiesImageView: UIView {
     }
 }
 
-extension ActivitiesImageView: ItemViewProtocol {
-    var action: (ItemModelProtocol) -> () {
+extension ActivitiesImageView: HTGKScrollViewProtocol {
+    var action: (HTGKScrollViewModelProtocol) -> () {
         get {
             return { _ in }
         }
@@ -73,7 +73,7 @@ extension ActivitiesImageView: ItemViewProtocol {
     }
 
     
-    public var currentItem: ItemModelProtocol {
+    public var currentItem: HTGKScrollViewModelProtocol {
         get {
             // 不需要获取返回值
             return self.item

@@ -52,14 +52,14 @@ class ViewController: UIViewController {
     
 }
 extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
-    func htgkScrollView(_ scrollView: HTGKScrollView, selectedModel: ItemModelProtocol) {
+    func htgkScrollView(_ scrollView: HTGKScrollView, selectedModel: HTGKScrollViewModelProtocol) {
         print(selectedModel)
         
     }
     
-    func htgkScrollView(_ scrollView: HTGKScrollView, viewForRowAt index: Int) -> ItemViewProtocol {
+    func htgkScrollView(_ scrollView: HTGKScrollView, viewForRowAt index: Int) -> HTGKScrollViewProtocol {
         
-        return ActivitiesImageView(frame: CGRect.init(x: 0, y: 0, width: 252, height: 150)) as ItemViewProtocol
+        return ActivitiesImageView(frame: CGRect.init(x: 0, y: 0, width: 252, height: 150)) as HTGKScrollViewProtocol
     }
     
 }

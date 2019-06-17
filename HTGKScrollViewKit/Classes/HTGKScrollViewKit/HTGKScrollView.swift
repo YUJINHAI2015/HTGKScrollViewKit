@@ -23,7 +23,7 @@ public class HTGKScrollView: UIView {
             self.commonInit(items: items)
         }
     }
-    public var items: [ItemModelProtocol]!
+    public var items: [HTGKScrollViewModelProtocol]!
     public var scrollViewDirection: ScrollViewDirection? = .horizontal
 
     private let itemSpace: CGFloat = 10
@@ -37,29 +37,38 @@ public class HTGKScrollView: UIView {
     ///
     /// - Parameters:
     ///   - items: 继承ItemModelProtocol的数据模型
-    public convenience init(items: [ItemModelProtocol], direction: ScrollViewDirection?) {
+    public convenience init(items: [HTGKScrollViewModelProtocol], direction: ScrollViewDirection?) {
         
         self.init()
         self.items = items
         self.scrollViewDirection = direction
     }
-    public convenience init(items: [ItemModelProtocol]) {
+    public convenience init(items: [HTGKScrollViewModelProtocol]) {
         
         self.init()
         self.items = items
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    private func commonInit(items: [ItemModelProtocol]) {
         /*
          |sapce-items-space|
          */
         self.addSubview(_scrollView)
 
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        /*
+         |sapce-items-space|
+         */
+        self.addSubview(_scrollView)
+
+    }
+    private func commonInit(items: [HTGKScrollViewModelProtocol]) {
+        // 移除原来的
+        for view in _scrollView.subviews {
+            view.removeFromSuperview()
+        }
         // itemView
         var previousView: UIView? = nil
         

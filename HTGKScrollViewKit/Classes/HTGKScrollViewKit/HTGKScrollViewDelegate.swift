@@ -9,9 +9,9 @@
 import UIKit
 
 public protocol HTGKScrollViewDelegate: AnyObject {
-    func htgkScrollView(_ scrollView: HTGKScrollView, selectedModel: ItemModelProtocol)
+    func htgkScrollView(_ scrollView: HTGKScrollView, selectedModel: HTGKScrollViewModelProtocol)
 }
 
 public protocol HTGKScrollViewDataSource: AnyObject {
-    func htgkScrollView(_ scrollView: HTGKScrollView, viewForRowAt index: Int) -> ItemViewProtocol
+    func htgkScrollView(_ scrollView: HTGKScrollView, viewForRowAt index: Int) -> HTGKScrollViewProtocol
 }

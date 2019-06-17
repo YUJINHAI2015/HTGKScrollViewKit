@@ -1,5 +1,5 @@
 //
-//  ItemModelProtocol.swift
+//  HTGKScrollViewModelProtocol.swift
 //  HeJing
 //
 //  Created by yujinhai on 2019/5/13.
@@ -8,6 +8,6 @@
 
 import UIKit
 // ItemModelProtocol并不需要实现，只需在model中实现
-public protocol ItemModelProtocol {
+public protocol HTGKScrollViewModelProtocol {
     
 }

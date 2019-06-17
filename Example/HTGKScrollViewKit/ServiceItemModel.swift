@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ServiceItemModel: ItemModelProtocol {
+struct ServiceItemModel: HTGKScrollViewModelProtocol {
     
     var id: Int!
     
