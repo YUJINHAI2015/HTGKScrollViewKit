@@ -19,7 +19,7 @@ class ActivitiesImageView: UIView {
     // MARK: - private var
     lazy private var _topImageView: UIImageView = {
         let imageView = UIImageView.init()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 5.0
         return imageView

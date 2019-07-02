@@ -26,8 +26,10 @@ public class HTGKScrollView: UIView {
     public var items: [HTGKScrollViewModelProtocol]!
     public var scrollViewDirection: ScrollViewDirection? = .horizontal
 
-    private let itemSpace: CGFloat = 10
-    
+    public var itemSpace: CGFloat = 10
+    public var firstItemSpace: CGFloat = 20
+    public var lastItemSpace: CGFloat = 20
+
     private lazy var _scrollView: UIScrollView = {
         let scrollView = UIScrollView.init()
         return scrollView
@@ -86,11 +88,18 @@ public class HTGKScrollView: UIView {
                 if self.scrollViewDirection == .horizontal {
                     make.top.equalToSuperview()
                     make.bottom.equalToSuperview()
-                    make.leading.equalTo(previousView?.snp.trailing ?? itemSpace).offset(itemSpace)
+                    
+                    if let trailing = previousView?.snp.trailing {
+                        // 中间
+                        make.leading.equalTo(trailing).offset(itemSpace)
+                    } else {
+                        // 第一个item
+                        make.leading.equalTo(previousView?.snp.trailing ?? firstItemSpace).offset(firstItemSpace)
+                    }
                 } else {
                     
                     make.leading.equalTo(_scrollView.snp.leading)
-                    make.top.equalTo(previousView?.snp.bottom ?? _scrollView.snp.top).offset(itemSpace)
+                    make.top.equalTo(previousView?.snp.bottom ?? _scrollView.snp.top).offset(lastItemSpace)
                 }
         
             }
@@ -101,7 +110,7 @@ public class HTGKScrollView: UIView {
         _scrollView.snp.makeConstraints { (make) in
             if self.scrollViewDirection == .horizontal {
                 make.top.equalTo(previousView!.snp.top)
-                make.trailing.equalTo(previousView!.snp.trailing).offset(itemSpace)
+                make.trailing.equalTo(previousView!.snp.trailing).offset(lastItemSpace)
             } else {
                 make.bottom.equalTo(previousView!.snp.bottom).offset(itemSpace)
                 make.trailing.equalTo(previousView!.snp.trailing).offset(itemSpace)
