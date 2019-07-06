@@ -26,7 +26,6 @@ public class HTGKScrollView: UIView {
 
     private lazy var _scrollView: UIScrollView = {
         let scrollView = UIScrollView.init(frame: self.bounds)
-        scrollView.backgroundColor = .blue
         return scrollView
     }()
 
