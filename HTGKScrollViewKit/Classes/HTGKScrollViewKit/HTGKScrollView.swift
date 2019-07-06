@@ -17,121 +17,85 @@ public enum ScrollViewDirection: Int {
 public class HTGKScrollView: UIView {
 
     public weak var delegate: HTGKScrollViewDelegate?
-    public weak var datasource: HTGKScrollViewDataSource? {
-        didSet {
-            // 初始化
-            self.commonInit(items: items)
-        }
-    }
-    public var items: [HTGKScrollViewModelProtocol]!
+    public weak var datasource: HTGKScrollViewDataSource?
+    
     public var scrollViewDirection: ScrollViewDirection? = .horizontal
-
     public var itemSpace: CGFloat = 10
     public var firstItemSpace: CGFloat = 20
     public var lastItemSpace: CGFloat = 20
 
     private lazy var _scrollView: UIScrollView = {
-        let scrollView = UIScrollView.init()
+        let scrollView = UIScrollView.init(frame: self.bounds)
+        scrollView.backgroundColor = .blue
         return scrollView
     }()
 
-    ///   布局Scrollview上面的view
-    ///
-    /// - Parameters:
-    ///   - items: 继承ItemModelProtocol的数据模型
-    public convenience init(items: [HTGKScrollViewModelProtocol], direction: ScrollViewDirection?) {
-        
-        self.init()
-        self.items = items
-        self.scrollViewDirection = direction
-    }
-    public convenience init(items: [HTGKScrollViewModelProtocol]) {
-        
-        self.init()
-        self.items = items
-    }
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
-        /*
-         |sapce-items-space|
-         */
+
         self.addSubview(_scrollView)
 
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        /*
-         |sapce-items-space|
-         */
-        self.addSubview(_scrollView)
 
+        self.addSubview(_scrollView)
     }
-    private func commonInit(items: [HTGKScrollViewModelProtocol]) {
+
+    override public func didMoveToWindow() {
+        super.didMoveToWindow()
+        self.draw()
+    }
+    public func reloadData() {
+        self.draw()
+    }
+    @objc func tapCell(recogniser: UIGestureRecognizer) {
+        let view = recogniser.view
+        if let tag = view?.tag {
+            self.delegate?.htgkScrollView(self, didSelectRowAt: tag)
+        }
+    }
+    private func draw() {
         // 移除原来的
         for view in _scrollView.subviews {
             view.removeFromSuperview()
         }
-        // itemView
-        var previousView: UIView? = nil
         
-        for (index, model) in items.enumerated() {
+        guard let datasource = self.datasource else {
+            return
+        }
+        self.layout(datasource: datasource)
+    }
+    
+    private func layout(datasource: HTGKScrollViewDataSource) {
+        
+        var offset: CGFloat = firstItemSpace
+        for index in (0..<datasource.numberOfRows(self)) {
+            
+            let cell = datasource.htgkScrollView(self, cellForRowAt: index)
+            cell.tag = index
+            _scrollView.addSubview(cell)
+            
+            let geture = UITapGestureRecognizer.init(target: self, action: #selector(tapCell(recogniser:)))
+            cell.addGestureRecognizer(geture)
 
-            let itemViews = self.datasource!.htgkScrollView(self, viewForRowAt: index)
-            
-            _scrollView.addSubview(itemViews)
-            itemViews.currentItem = model
-            itemViews.action = { [weak self](item) in
-                self!.delegate?.htgkScrollView(self!, selectedModel: item)
-            }
-            
-            itemViews.snp.makeConstraints { (make) in
-                if self.scrollViewDirection == .horizontal {
-                    make.top.equalToSuperview()
-                    make.bottom.equalToSuperview()
-                    
-                    if let trailing = previousView?.snp.trailing {
-                        // 中间
-                        make.leading.equalTo(trailing).offset(itemSpace)
-                    } else {
-                        // 第一个item
-                        make.leading.equalTo(previousView?.snp.trailing ?? firstItemSpace).offset(firstItemSpace)
-                    }
-                } else {
-                    
-                    make.leading.equalTo(_scrollView.snp.leading)
-                    make.top.equalTo(previousView?.snp.bottom ?? _scrollView.snp.top).offset(lastItemSpace)
-                }
-        
-            }
-            // 每次存储最后一个view
-            previousView = itemViews
-        }
-        // scrollView以最后一个view的约束为准
-        _scrollView.snp.makeConstraints { (make) in
             if self.scrollViewDirection == .horizontal {
-                make.top.equalTo(previousView!.snp.top)
-                make.trailing.equalTo(previousView!.snp.trailing).offset(lastItemSpace)
+                
+                cell.frame.origin = CGPoint.init(x: offset, y: 0)
+                offset += (cell.bounds.size.width) + itemSpace
             } else {
-                make.bottom.equalTo(previousView!.snp.bottom).offset(itemSpace)
-                make.trailing.equalTo(previousView!.snp.trailing).offset(itemSpace)
+                cell.frame.origin = CGPoint.init(x: 0, y: offset)
+                offset += (cell.bounds.size.height) + itemSpace
             }
-            make.edges.equalToSuperview()
         }
         
-        // 更新self
+        var size = _scrollView.bounds.size
+        
         if self.scrollViewDirection == .horizontal {
-            if self.frame.size.width == 0 {
-                
-                let frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (previousView?.frame.size.height)!)
-                self.frame = frame
-            }
+            size.width = offset - itemSpace + lastItemSpace
         } else {
-            if self.frame.size.width == 0 {
-                
-                let frame = CGRect.init(x: 0, y: 0, width: (previousView?.frame.size.width)!, height: UIScreen.main.bounds.height)
-                self.frame = frame
-            }
+            size.height = offset - itemSpace + lastItemSpace
         }
-        
+        _scrollView.contentSize = size
     }
 }

@@ -9,59 +9,47 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    lazy var htgkScrollView: HTGKScrollView = {
+        let scrollView = HTGKScrollView.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 200))
+        scrollView.delegate = self
+        scrollView.datasource = self
+        scrollView.firstItemSpace = 0
+//        scrollView.scrollViewDirection = .vertical
+        scrollView.backgroundColor = .green
+        return scrollView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        sc.snp.makeConstraints { (make) in
-//            make.height.equalTo(250)
-//            make.width.equalTo(414)
-//            make.top.equalTo(self.view.snp.top).offset(100)
-//            make.leading.equalToSuperview()
-//        }
 
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let sc = self.scrollView()
-        self.view.addSubview(sc)
+        self.view.addSubview(htgkScrollView)
 
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.htgkScrollView.reloadData()
     }
-
-    func scrollView() -> UIView {
-        let item2 = ServiceItemModel.init(id: 2,image: UIImage.init(named: "Rectangle Copy")!, title: "sfasdfawea")
-        let items = [item2,item2,item2,item2,item2,item2,item2]
-        
-        // scrollview
-        let scrollview = HTGKScrollView.init(items: items)
-        scrollview.frame = CGRect.init(x: 0, y: 100, width: 400, height: 150)
-        scrollview.backgroundColor = .red
-        scrollview.scrollViewDirection = .horizontal
-        scrollview.items = items
-        scrollview.delegate = self
-        scrollview.datasource = self
-        return scrollview
-    }
-    
-    
-    
 }
 extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
-    func htgkScrollView(_ scrollView: HTGKScrollView, selectedModel: HTGKScrollViewModelProtocol) {
-        print(selectedModel)
-        
+    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int) {
+        print(index)
     }
     
-    func htgkScrollView(_ scrollView: HTGKScrollView, viewForRowAt index: Int) -> HTGKScrollViewProtocol {
-        
-        return ActivitiesImageView(frame: CGRect.init(x: 0, y: 0, width: 252, height: 150)) as HTGKScrollViewProtocol
-    }
     
+    func numberOfRows(_ scrollView: HTGKScrollView) -> Int {
+        return 5
+    }
+    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> HTGKScrollViewCell {
+        let view = MyView.init(frame: CGRect.init(x: 0, y: 0, width: 90, height: 50))
+        view.backgroundColor = .red
+        return view
+    }
+
 }
 
 

@@ -18,8 +18,8 @@
 		20B7A3D466E91A1EAA9783209340E97E /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6693C457C9655D1E49B7B8027767CF /* LayoutConstraintItem.swift */; };
 		21B5991AF298A2A418E6E13F77440135 /* Pods-HTGKScrollViewKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B4BC5D96771CE27528A21839FAE862B /* Pods-HTGKScrollViewKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		230A8A907BAB5AA0191D6B4D2B122854 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAE53F55D20F1D0B4EFF4CA696DE24F /* SnapKit.framework */; };
+		242FF1B322D0531F006C40F3 /* HTGKScrollViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242FF1B222D0531F006C40F3 /* HTGKScrollViewCell.swift */; };
 		2934FA0BAFD3783E2C5BA83EB84B532E /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A754244D675324E814E05CF1E281645 /* ConstraintPriorityTarget.swift */; };
-		2A2CEA620F5BF34BF72F34A625914420 /* HTGKScrollViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638F623437F8513A7ECA36ED20AB057 /* HTGKScrollViewModelProtocol.swift */; };
 		4BE19A4325FA169D64BF3943A0E5E93F /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A7AEA6044B2018807C2D766ED9025D /* ConstraintItem.swift */; };
 		5A3EB1A857012A077FE789C77DCD5A3D /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D85E58F3C5B8F418EE9B0A943DFB6 /* ConstraintLayoutGuide.swift */; };
 		5D7B2CAEAB47B9205DAFB0F451680087 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D310AAB8E50557845B5D7CF84C02F45 /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,7 +34,6 @@
 		882F020E9619FD1F8767A6B2C1179F11 /* HTGKScrollViewKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B4B97BFF3F5501851367440CC3B0B23F /* HTGKScrollViewKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89E71AFA62D8CED1BF33F8A76E3095CF /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718501E66EB9C33CE1F87D62CC2CC57D /* ConstraintViewDSL.swift */; };
 		8B569E1A8BC0CC96E6E90441AF3E06D1 /* Pods-HTGKScrollViewKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9315D011C03A758CD2D2D198CD7DB4C4 /* Pods-HTGKScrollViewKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		92153501D723DEBDD3CBE89E1EFD506C /* HTGKScrollViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242D9D15142F58EB45BCCBB7FE5C6ED3 /* HTGKScrollViewProtocol.swift */; };
 		93130971D3DE6F6E121A23CA391EDDCF /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5926F04B724FCFC18EB3D230A13C07 /* ConstraintMakerFinalizable.swift */; };
 		A08FF5D30B1284FCEF59D07CF0AB5112 /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC6236D47CB2BA34B4F1F344E985DF2 /* ConstraintMultiplierTarget.swift */; };
 		A1DC6AA03992A4960B73E52AD58EFF8C /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425101B552E11290A01971FB977C9D94 /* ConstraintInsets.swift */; };
@@ -106,7 +105,7 @@
 		1D310AAB8E50557845B5D7CF84C02F45 /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
 		215EB1EB7D34BAE4D61BE35FD37C7B8C /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConstantTarget.swift; path = Source/ConstraintConstantTarget.swift; sourceTree = "<group>"; };
 		218DECB55AE295F271C9D4E2198054FA /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Source/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
-		242D9D15142F58EB45BCCBB7FE5C6ED3 /* HTGKScrollViewProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HTGKScrollViewProtocol.swift; sourceTree = "<group>"; };
+		242FF1B222D0531F006C40F3 /* HTGKScrollViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HTGKScrollViewCell.swift; path = HTGKScrollViewKit/Classes/HTGKScrollViewKit/HTGKScrollViewCell.swift; sourceTree = "<group>"; };
 		26FF6A5B7704FACC7F9307D312A7EF61 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Source/ConstraintRelation.swift; sourceTree = "<group>"; };
 		2DD0E6408D8CA6189360BFFEB2C1EDF6 /* Pods-HTGKScrollViewKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HTGKScrollViewKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3430CAA9F5F4252B6DD4819000AF4AF3 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsetTarget.swift; path = Source/ConstraintInsetTarget.swift; sourceTree = "<group>"; };
@@ -119,7 +118,6 @@
 		42EC8E050E3BE6E46D7C010378F29A56 /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerPriortizable.swift; path = Source/ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
 		47307988E8E72020E3514B320E498849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		477216DA63180061D34F8E683BBEB2C2 /* Pods-HTGKScrollViewKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HTGKScrollViewKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		5638F623437F8513A7ECA36ED20AB057 /* HTGKScrollViewModelProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HTGKScrollViewModelProtocol.swift; sourceTree = "<group>"; };
 		56BE246D75680A72BCF471DDD7CEF860 /* HTGKScrollViewKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HTGKScrollViewKit-dummy.m"; sourceTree = "<group>"; };
 		5D03F3C139319EA4D8F5A6B079637C29 /* SnapKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.xcconfig; sourceTree = "<group>"; };
 		5FC6236D47CB2BA34B4F1F344E985DF2 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Source/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
@@ -211,9 +209,9 @@
 		34ACCF788E91AAF84A276EBA32DE04E2 /* HTGKScrollViewKit */ = {
 			isa = PBXGroup;
 			children = (
+				242FF1B222D0531F006C40F3 /* HTGKScrollViewCell.swift */,
 				68D7AD9670781CB0746BF6290D875137 /* HTGKScrollView.swift */,
 				F3FFE3229C1630F5E1390164F91968F3 /* HTGKScrollViewDelegate.swift */,
-				DE9478DCE214CD5218BBB4AF846CA516 /* ItemProtocol */,
 				C0E75489AE7562B2776C921BF9A49D41 /* Pod */,
 				9005B2FEE5AF8D199954563B3301389B /* Support Files */,
 			);
@@ -341,16 +339,6 @@
 				A94F48054DA011BDB2FE3990EF7AF7A4 /* Products */,
 				AED2547CE26C1055E58483C9E756D764 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		DE9478DCE214CD5218BBB4AF846CA516 /* ItemProtocol */ = {
-			isa = PBXGroup;
-			children = (
-				5638F623437F8513A7ECA36ED20AB057 /* HTGKScrollViewModelProtocol.swift */,
-				242D9D15142F58EB45BCCBB7FE5C6ED3 /* HTGKScrollViewProtocol.swift */,
-			);
-			name = ItemProtocol;
-			path = HTGKScrollViewKit/Classes/HTGKScrollViewKit/ItemProtocol;
 			sourceTree = "<group>";
 		};
 		E30FFDD7CFF30076B0BF0F0C15956A86 /* Support Files */ = {
@@ -592,8 +580,7 @@
 				B8A0451CDAFE132BDB1E022483B1B5C0 /* HTGKScrollView.swift in Sources */,
 				ABFE3E0B9ABB6C13C8FE9152781223FC /* HTGKScrollViewDelegate.swift in Sources */,
 				D856161F013EF3F9EFCAD158C84EAEFE /* HTGKScrollViewKit-dummy.m in Sources */,
-				2A2CEA620F5BF34BF72F34A625914420 /* HTGKScrollViewModelProtocol.swift in Sources */,
-				92153501D723DEBDD3CBE89E1EFD506C /* HTGKScrollViewProtocol.swift in Sources */,
+				242FF1B322D0531F006C40F3 /* HTGKScrollViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
