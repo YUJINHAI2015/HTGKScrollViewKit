@@ -11,10 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var htgkScrollView: HTGKScrollView = {
-        let scrollView = HTGKScrollView.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 200))
+        let scrollView = HTGKScrollView.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 60))
         scrollView.delegate = self
         scrollView.datasource = self
-        scrollView.firstItemSpace = 0
+//        scrollView.firstItemSpace = 0
 //        scrollView.scrollViewDirection = .vertical
         scrollView.backgroundColor = .green
         return scrollView
@@ -45,8 +45,8 @@ extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
         return 5
     }
     func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> HTGKScrollViewCell {
-        let view = MyView.init(frame: CGRect.init(x: 0, y: 0, width: 90, height: 50))
-        view.backgroundColor = .red
+        let view = MyView.init(frame: CGRect.init(x: 0, y: 0, width: 140, height: 50))
+        view.backgroundColor = .blue
         return view
     }
 

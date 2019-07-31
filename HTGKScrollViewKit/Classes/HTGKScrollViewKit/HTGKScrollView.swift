@@ -16,6 +16,8 @@ public enum ScrollViewDirection: Int {
 
 public class HTGKScrollView: UIView {
 
+    static let HTGKScrollViewCellIdentifier = "HTGKScrollViewCellIdentifier"
+    
     public weak var delegate: HTGKScrollViewDelegate?
     public weak var datasource: HTGKScrollViewDataSource?
     
@@ -24,29 +26,45 @@ public class HTGKScrollView: UIView {
     public var firstItemSpace: CGFloat = 20
     public var lastItemSpace: CGFloat = 20
 
-    private lazy var _scrollView: UIScrollView = {
-        let scrollView = UIScrollView.init(frame: self.bounds)
-        return scrollView
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView.init(frame: self.bounds,
+                                                   collectionViewLayout: self.collectionFlowLayout)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = true
+        collectionView.backgroundColor = .white
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: HTGKScrollView.HTGKScrollViewCellIdentifier)
+        return collectionView
+    }()
+    
+    private lazy var collectionFlowLayout: UICollectionViewFlowLayout! = {
+        // cell
+        let space: CGFloat = 0
+        let layout = UICollectionViewFlowLayout()
+//        layout.itemSize = CGSize.init(width: 50, height: 50)
+        layout.minimumLineSpacing = itemSpace // 行间距
+        layout.minimumInteritemSpacing = itemSpace // 列间距
+        layout.scrollDirection = self.scrollViewDirection == ScrollViewDirection.vertical ? .vertical : .horizontal
+        layout.sectionInset = UIEdgeInsets.init(top: space, left: firstItemSpace, bottom: space, right: lastItemSpace)
+        return layout
     }()
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.addSubview(_scrollView)
+        self.addSubview(self.collectionView)
 
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        self.addSubview(_scrollView)
+        self.addSubview(self.collectionView)
     }
 
-    override public func didMoveToWindow() {
-        super.didMoveToWindow()
-        self.draw()
-    }
     public func reloadData() {
-        self.draw()
+        self.collectionView.reloadData()
     }
     @objc func tapCell(recogniser: UIGestureRecognizer) {
         let view = recogniser.view
@@ -54,47 +72,44 @@ public class HTGKScrollView: UIView {
             self.delegate?.htgkScrollView(self, didSelectRowAt: tag)
         }
     }
-    private func draw() {
-        // 移除原来的
-        for view in _scrollView.subviews {
-            view.removeFromSuperview()
-        }
-        
-        guard let datasource = self.datasource else {
-            return
-        }
-        self.layout(datasource: datasource)
-    }
     
-    private func layout(datasource: HTGKScrollViewDataSource) {
+    private func layout(datasource: HTGKScrollViewDataSource) -> CGSize {
         
-        var offset: CGFloat = firstItemSpace
+        var offset: CGFloat = 0
         for index in (0..<datasource.numberOfRows(self)) {
             
             let cell = datasource.htgkScrollView(self, cellForRowAt: index)
-            cell.tag = index
-            _scrollView.addSubview(cell)
-            
-            let geture = UITapGestureRecognizer.init(target: self, action: #selector(tapCell(recogniser:)))
-            cell.addGestureRecognizer(geture)
+            offset += (cell.bounds.size.width) + itemSpace
+        }
+        let width = firstItemSpace + offset + lastItemSpace
+        
+        return CGSize.init(width: width, height: self.collectionView.frame.height)
+    }
+}
 
-            if self.scrollViewDirection == .horizontal {
-                
-                cell.frame.origin = CGPoint.init(x: offset, y: 0)
-                offset += (cell.bounds.size.width) + itemSpace
-            } else {
-                cell.frame.origin = CGPoint.init(x: 0, y: offset)
-                offset += (cell.bounds.size.height) + itemSpace
-            }
-        }
+extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.datasource?.numberOfRows(self) ?? 0
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var size = _scrollView.bounds.size
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HTGKScrollView.HTGKScrollViewCellIdentifier, for: indexPath)
         
-        if self.scrollViewDirection == .horizontal {
-            size.width = offset - itemSpace + lastItemSpace
-        } else {
-            size.height = offset - itemSpace + lastItemSpace
+        if let view = self.datasource?.htgkScrollView(self, cellForRowAt: indexPath.row),
+            cell.tag != -1 {
+            cell.tag = -1
+            cell.addSubview(view)
         }
-        _scrollView.contentSize = size
+
+        return cell
+    }
+}
+extension HTGKScrollView: UICollectionViewDelegateFlowLayout {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let view = self.datasource?.htgkScrollView(self, cellForRowAt: indexPath.row) else {
+            return CGSize.zero
+        }
+        return view.frame.size
     }
 }
