@@ -44,7 +44,7 @@ public class HTGKScrollView: UIView {
         let space: CGFloat = 0
         let layout = UICollectionViewFlowLayout()
         //        layout.itemSize = CGSize.init(width: 50, height: 50)
-        layout.minimumLineSpacing = 0 // 行间距
+        layout.minimumLineSpacing = itemSpace // 行间距
         layout.minimumInteritemSpacing = itemSpace // 列间距
         layout.scrollDirection = self.scrollViewDirection == ScrollViewDirection.vertical ? .vertical : .horizontal
         layout.sectionInset = UIEdgeInsets.init(top: space, left: firstItemSpace, bottom: space, right: lastItemSpace)
