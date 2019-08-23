@@ -11,12 +11,16 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var htgkScrollView: HTGKScrollView = {
-        let scrollView = HTGKScrollView.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 60))
+        
+        var configure = HTGKScrollViewConfigure()
+        configure.itemSpace = 40
+        configure.firstItemSpace = 0
+        configure.lastItemSpace = 0
+        configure.isPagingEnabled = true
+        
+        let scrollView = HTGKScrollView.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 60), configure: configure)
         scrollView.delegate = self
         scrollView.datasource = self
-//        scrollView.firstItemSpace = 0
-//        scrollView.scrollViewDirection = .vertical
-        scrollView.backgroundColor = .green
         return scrollView
     }()
 
