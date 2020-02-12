@@ -1,13 +1,14 @@
 PODS:
-  - HTGKScrollViewKit (0.1.0):
+  - HTGKScrollViewKit (0.7.0):
     - SnapKit (~> 4.2.0)
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - HTGKScrollViewKit (from `../`)
+  - SnapKit (~> 4.2.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -15,9 +16,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  HTGKScrollViewKit: 9e69c1e21df8fd6d4ac3a42ffdf6dc90ba83f3cf
+  HTGKScrollViewKit: 104f7fd057815d782e60be0e988b78312aec3ea8
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 17f7ba928efa1f208cebed3a9a83120eb40e003a
+PODFILE CHECKSUM: 4ed34c7257a261f3e460204055c413010c07487c
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.8.4

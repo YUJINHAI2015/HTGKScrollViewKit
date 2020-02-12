@@ -1,6 +1,6 @@
 {
   "name": "HTGKScrollViewKit",
-  "version": "0.1.0",
+  "version": "0.7.0",
   "summary": "HTGKScrollViewKit 一个简单的Scrollview框架",
   "description": "需要有两个代理方法，delegate和datasource,传入的数据要支持ItemModelProtocol,传入的UView要支持ItemViewProtocol",
   "homepage": "https://github.com/YUJINHAI2015/HTGKScrollViewKit",
@@ -13,16 +13,17 @@
   },
   "source": {
     "git": "https://github.com/YUJINHAI2015/HTGKScrollViewKit.git",
-    "tag": "0.1.0"
+    "tag": "0.7.0"
   },
   "platforms": {
     "ios": "8.0"
   },
   "source_files": "HTGKScrollViewKit/Classes/**/*",
-  "swift_version": "5.0",
+  "swift_versions": "5.0",
   "dependencies": {
     "SnapKit": [
       "~> 4.2.0"
     ]
-  }
+  },
+  "swift_version": "5.0"
 }

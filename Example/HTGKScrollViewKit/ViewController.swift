@@ -13,12 +13,11 @@ class ViewController: UIViewController {
     lazy var htgkScrollView: HTGKScrollView = {
         
         var configure = HTGKScrollViewConfigure()
-        configure.itemSpace = 40
-        configure.firstItemSpace = 0
-        configure.lastItemSpace = 0
-        configure.isPagingEnabled = true
-        
-        let scrollView = HTGKScrollView.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 60), configure: configure)
+        configure.edgeInsets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 10)
+        configure.lineSpacing = 10
+    
+        configure.scrollViewDirection = .vertical
+        let scrollView = HTGKScrollView.init(configure)
         scrollView.delegate = self
         scrollView.datasource = self
         return scrollView
@@ -27,16 +26,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         self.view.addSubview(htgkScrollView)
 
+        self.htgkScrollView.snp.makeConstraints { (make) in
+            make.top.equalTo(200)
+            make.leading.trailing.equalTo(0)
+            make.height.equalTo(300)
+        }
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.htgkScrollView.reloadData()
+//        self.htgkScrollView.reloadData()
+        self.htgkScrollView.reloadIndex(at: [0])
     }
 }
 extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
@@ -46,10 +47,11 @@ extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
     
     
     func numberOfRows(_ scrollView: HTGKScrollView) -> Int {
-        return 5
+        return 2
     }
-    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> HTGKScrollViewCell {
-        let view = MyView.init(frame: CGRect.init(x: 0, y: 0, width: 140, height: 50))
+    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> UIView {
+        let view = MyView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
+        view.myText = "self"
         view.backgroundColor = .blue
         return view
     }

@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import SnapKit
 
-class MyView: HTGKScrollViewCell {
+class MyView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var myText: String = "" {
+        didSet {
+            self.myTextLabel.text = myText
+            self.addSubview(myTextLabel)
+            self.myTextLabel.snp.makeConstraints { (make) in
+//                make.width.equalTo(200)
+//                make.height.equalTo(200)
+//                make.top.leading.equalTo(0)
+                make.edges.equalToSuperview()
+            }
+        }
     }
-    */
-
+    
+    var myTextLabel: UILabel = {
+        let label = UILabel.init()
+        label.textColor = .black
+        label.numberOfLines = 0
+        return label
+    }()
+    
 }

@@ -15,6 +15,7 @@ public protocol HTGKScrollViewDelegate: AnyObject {
 public protocol HTGKScrollViewDataSource: AnyObject {
     
     func numberOfRows(_ scrollView: HTGKScrollView) -> Int
-    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> HTGKScrollViewCell
+    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> UIView
+    
 
 }

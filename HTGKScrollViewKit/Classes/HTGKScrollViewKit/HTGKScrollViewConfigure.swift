@@ -15,11 +15,13 @@ public struct HTGKScrollViewConfigure {
     public init() {
         
     }
-    public var itemSpace: CGFloat = 10
-    public var firstItemSpace: CGFloat = 20
-    public var lastItemSpace: CGFloat = 20
-
+    
+    // 外边距
+    public var edgeInsets: UIEdgeInsets = UIEdgeInsets.zero
+    // 行间距
+    public var lineSpacing: CGFloat = 0
+    // 列间距
+    public var interitemSpacing: CGFloat = 0
+    // 滚动方向
     public var scrollViewDirection: ScrollViewDirection? = .horizontal
-    public var isPagingEnabled: Bool = false
-
 }

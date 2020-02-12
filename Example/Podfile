@@ -3,6 +3,8 @@ use_frameworks!
 target 'HTGKScrollViewKit_Example' do
   pod 'HTGKScrollViewKit', :path => '../'
 
+  pod 'SnapKit', '~>4.2.0'
+  
   target 'HTGKScrollViewKit_Tests' do
     inherit! :search_paths
 

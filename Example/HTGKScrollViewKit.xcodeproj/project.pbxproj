@@ -194,7 +194,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = G473J6JA5S;
+						DevelopmentTeam = TZHP9KFE6M;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
@@ -250,16 +250,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HTGKScrollViewKit_Example/Pods-HTGKScrollViewKit_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/HTGKScrollViewKit/HTGKScrollViewKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTGKScrollViewKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -473,7 +469,7 @@
 			baseConfigurationReference = 6774A007936A31013FD12ED5 /* Pods-HTGKScrollViewKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = G473J6JA5S;
+				DEVELOPMENT_TEAM = TZHP9KFE6M;
 				INFOPLIST_FILE = HTGKScrollViewKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -489,7 +485,7 @@
 			baseConfigurationReference = 1B5ECE6194A8C0BD1EB5E96C /* Pods-HTGKScrollViewKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = G473J6JA5S;
+				DEVELOPMENT_TEAM = TZHP9KFE6M;
 				INFOPLIST_FILE = HTGKScrollViewKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
