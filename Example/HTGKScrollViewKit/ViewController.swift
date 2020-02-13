@@ -13,13 +13,11 @@ class ViewController: UIViewController {
     lazy var htgkScrollView: HTGKScrollView = {
         
         var configure = HTGKScrollViewConfigure()
-        configure.edgeInsets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 10)
-        configure.lineSpacing = 10
-    
-        configure.scrollViewDirection = .vertical
+        configure.scrollViewDirection = .horizontal
         let scrollView = HTGKScrollView.init(configure)
         scrollView.delegate = self
         scrollView.datasource = self
+        scrollView.collectionView.isPagingEnabled = true
         return scrollView
     }()
 
@@ -29,10 +27,9 @@ class ViewController: UIViewController {
         self.view.addSubview(htgkScrollView)
 
         self.htgkScrollView.snp.makeConstraints { (make) in
-            make.top.equalTo(200)
-            make.leading.trailing.equalTo(0)
-            make.height.equalTo(300)
+            make.edges.equalToSuperview()
         }
+        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -50,12 +47,15 @@ extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
         return 2
     }
     func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> UIView {
-        let view = MyView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
+        let view = MyView.init(frame: self.htgkScrollView.bounds)
         view.myText = "self"
         view.backgroundColor = .blue
         return view
     }
 
+    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int) {
+        print(index)
+    }
 }
 
 

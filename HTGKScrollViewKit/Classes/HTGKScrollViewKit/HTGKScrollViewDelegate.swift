@@ -10,6 +10,8 @@ import UIKit
 
 public protocol HTGKScrollViewDelegate: AnyObject {
     func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int)
+    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int)
+
 }
 
 public protocol HTGKScrollViewDataSource: AnyObject {

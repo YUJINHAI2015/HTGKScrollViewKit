@@ -107,6 +107,22 @@ extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         return cell
     }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // 垂直
+        if self.configure.scrollViewDirection == .vertical {
+
+            let contentOffsetY = scrollView.contentOffset.y
+            let index: Int = Int(contentOffsetY / self.frame.height)
+            self.delegate?.htgkScrollView(self, didSelectPageAt: index)
+        }
+        // 水平
+        if self.configure.scrollViewDirection == .horizontal {
+            let contentOffsetY = scrollView.contentOffset.x
+            let index: Int = Int(contentOffsetY / self.frame.width)
+            self.delegate?.htgkScrollView(self, didSelectPageAt: index)
+        }
+    }
 }
 extension HTGKScrollView: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
