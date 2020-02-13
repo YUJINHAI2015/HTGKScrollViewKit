@@ -8,9 +8,10 @@
 
 import UIKit
 
-public protocol HTGKScrollViewDelegate: AnyObject {
-    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int)
-    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int)
+@objc public protocol HTGKScrollViewDelegate: AnyObject {
+    @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int)
+    @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int)
+    @objc optional func htgkScrollViewDidScroll(_ scrollView: HTGKScrollView, scrollView: UIScrollView)
 
 }
 
@@ -20,4 +21,9 @@ public protocol HTGKScrollViewDataSource: AnyObject {
     func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> UIView
     
 
+}
+
+extension HTGKScrollViewDelegate {
+    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int) {}
+    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int) {}
 }

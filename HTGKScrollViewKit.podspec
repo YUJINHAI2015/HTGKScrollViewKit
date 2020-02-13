@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HTGKScrollViewKit'
-  s.version          = '0.8.1'
+  s.version          = '0.8.2'
   s.summary          = 'HTGKScrollViewKit 一个简单的Scrollview框架'
 
 # This description is used to generate tags and improve search results.

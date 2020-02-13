@@ -37,11 +37,7 @@ class ViewController: UIViewController {
         self.htgkScrollView.reloadIndex(at: [0])
     }
 }
-extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
-    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int) {
-        print(index)
-    }
-    
+extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {    
     
     func numberOfRows(_ scrollView: HTGKScrollView) -> Int {
         return 2
@@ -53,9 +49,9 @@ extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
         return view
     }
 
-    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int) {
-        print(index)
-    }
+//    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int) {
+//        print(index)
+//    }
 }
 
 

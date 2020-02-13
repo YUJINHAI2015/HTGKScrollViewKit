@@ -123,6 +123,9 @@ extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
             self.delegate?.htgkScrollView(self, didSelectPageAt: index)
         }
     }
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.delegate?.htgkScrollViewDidScroll?(self, scrollView: scrollView)
+    }
 }
 extension HTGKScrollView: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
