@@ -11,7 +11,7 @@ import UIKit
 @objc public protocol HTGKScrollViewDelegate: AnyObject {
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int)
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int)
-    @objc optional func htgkScrollViewDidScroll(_ scrollView: HTGKScrollView, scrollView: UIScrollView)
+    @objc optional func htgkScrollViewDidScroll(_ scrollView: HTGKScrollView, atScrollView: UIScrollView)
 
 }
 

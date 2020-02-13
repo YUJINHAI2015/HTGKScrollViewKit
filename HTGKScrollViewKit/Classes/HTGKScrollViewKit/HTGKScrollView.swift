@@ -124,7 +124,7 @@ extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.delegate?.htgkScrollViewDidScroll?(self, scrollView: scrollView)
+        self.delegate?.htgkScrollViewDidScroll?(self, atScrollView: scrollView)
     }
 }
 extension HTGKScrollView: UICollectionViewDelegateFlowLayout {
