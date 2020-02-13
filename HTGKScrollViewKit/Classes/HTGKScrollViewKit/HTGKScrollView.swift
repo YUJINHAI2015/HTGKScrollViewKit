@@ -71,7 +71,10 @@ public class HTGKScrollView: UIView {
     @objc func tapCell(recogniser: UIGestureRecognizer) {
         let view = recogniser.view
         if let tag = view?.tag {
-            self.delegate?.htgkScrollView(self, didSelectRowAt: tag)
+            
+            if let _ = self.delegate?.responds(to: #selector(self.delegate?.htgkScrollView(_:didSelectRowAt:))) {
+                self.delegate?.htgkScrollView?(self, didSelectRowAt: tag)
+            }
         }
     }
     private func initUI() {
@@ -110,18 +113,22 @@ extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // 垂直
+        var currentIndex: Int = 0
         if self.configure.scrollViewDirection == .vertical {
 
             let contentOffsetY = scrollView.contentOffset.y
-            let index: Int = Int(contentOffsetY / self.frame.height)
-            self.delegate?.htgkScrollView(self, didSelectPageAt: index)
+            currentIndex = Int(contentOffsetY / self.frame.height)
         }
         // 水平
         if self.configure.scrollViewDirection == .horizontal {
             let contentOffsetY = scrollView.contentOffset.x
-            let index: Int = Int(contentOffsetY / self.frame.width)
-            self.delegate?.htgkScrollView(self, didSelectPageAt: index)
+            currentIndex = Int(contentOffsetY / self.frame.width)
         }
+        
+        if let _ = self.delegate?.responds(to: #selector(self.delegate?.htgkScrollView(_:didSelectRowAt:))) {
+            self.delegate?.htgkScrollView?(self, didSelectPageAt: currentIndex)
+        }
+
     }
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.delegate?.htgkScrollViewDidScroll?(self, atScrollView: scrollView)

@@ -49,9 +49,9 @@ extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
         return view
     }
 
-//    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int) {
-//        print(index)
-//    }
+    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int) {
+        print(index)
+    }
 }
 
 

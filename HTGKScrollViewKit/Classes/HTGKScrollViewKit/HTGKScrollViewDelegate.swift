@@ -8,22 +8,17 @@
 
 import UIKit
 
-@objc public protocol HTGKScrollViewDelegate: AnyObject {
+@objc public protocol HTGKScrollViewDelegate: NSObjectProtocol {
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int)
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int)
     @objc optional func htgkScrollViewDidScroll(_ scrollView: HTGKScrollView, atScrollView: UIScrollView)
 
 }
 
-public protocol HTGKScrollViewDataSource: AnyObject {
+public protocol HTGKScrollViewDataSource: NSObjectProtocol {
     
     func numberOfRows(_ scrollView: HTGKScrollView) -> Int
     func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> UIView
     
 
-}
-
-extension HTGKScrollViewDelegate {
-    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int) {}
-    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int) {}
 }
