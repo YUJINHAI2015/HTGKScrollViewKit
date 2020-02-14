@@ -13,11 +13,11 @@ class ViewController: UIViewController {
     lazy var htgkScrollView: HTGKScrollView = {
         
         var configure = HTGKScrollViewConfigure()
-        configure.lineSpacing = 50
+        configure.lineSpacing = 10
         configure.interitemSpacing = 10
-        configure.edgeInsets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 10)
-        configure.scrollViewDirection = .horizontal
-        configure.columnCount = 3
+//        configure.edgeInsets = UIEdgeInsets.init(top: 10, left: 0, bottom: 10, right: 0)
+//        configure.scrollViewDirection = .vertical
+        configure.columnCount = 1
         configure.scrollViewLayout = .custom
         let scrollView = HTGKScrollView.init(configure)
 //        scrollView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 200)
@@ -35,7 +35,8 @@ class ViewController: UIViewController {
 
         self.view.addSubview(htgkScrollView)
         self.htgkScrollView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
+            make.left.bottom.right.equalTo(0)
+            make.top.equalTo(40)
         }
     }
 
@@ -45,11 +46,10 @@ class ViewController: UIViewController {
 //    }
 }
 extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
-    func htgkScrollView(flowLayout: HTGKFlowLayout, updateHeightForWidth: CGFloat, atIndexPath: IndexPath) -> CGFloat {
+    func htgkScrollView(_ scrollView: HTGKScrollView, flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGFloat {
         let image = UIImage.init(named: imageNames[atIndexPath.row])
-        let ScreenWidth = UIScreen.main.bounds.size.width
-        let width = (ScreenWidth - 30)/2
-        let height = (image?.size.height)! * (width/(image?.size.width)!)
+
+        let height = (image?.size.height)! * (fixedLength/(image?.size.width)!)
         return height
     }
     

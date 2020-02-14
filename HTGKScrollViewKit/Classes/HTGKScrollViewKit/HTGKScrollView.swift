@@ -38,7 +38,7 @@ public class HTGKScrollView: UIView {
             let layout = HTGKFlowLayout()
             layout.minimumLineSpacing = configure.lineSpacing // 行间距
             layout.minimumInteritemSpacing = configure.interitemSpacing // 列间距
-            layout.scrollDirection = configure.scrollViewDirection == ScrollViewDirection.vertical ? .vertical : .horizontal
+            layout.scrollDirection = configure.scrollViewDirection == .vertical ? .vertical : .horizontal
             layout.sectionInset = configure.edgeInsets
             layout.columnCount = configure.columnCount
             
@@ -49,7 +49,7 @@ public class HTGKScrollView: UIView {
             let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = configure.lineSpacing // 行间距
             layout.minimumInteritemSpacing = configure.interitemSpacing // 列间距
-            layout.scrollDirection = configure.scrollViewDirection == ScrollViewDirection.vertical ? .vertical : .horizontal
+            layout.scrollDirection = configure.scrollViewDirection == .vertical ? .vertical : .horizontal
             layout.sectionInset = configure.edgeInsets
 
             if #available(iOS 10.0, *) {
@@ -148,17 +148,17 @@ extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
 
     }
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.delegate?.htgkScrollViewDidScroll?(self, atScrollView: scrollView)
+        self.delegate?.htgkScrollView?(self, didScrollAtScrollView: scrollView)
     }
 }
 
 extension HTGKScrollView: HTGKFlowLayoutDelegate {
-    public func waterFlowLayout(flowLayout: HTGKFlowLayout, updateHeightForWidth: CGFloat, atIndexPath: IndexPath) -> CGFloat
+    public func waterFlowLayout(flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGFloat
     {
         
         if configure.scrollViewLayout == .custom {
             
-            return ((self.delegate?.htgkScrollView?(flowLayout: flowLayout, updateHeightForWidth: updateHeightForWidth, atIndexPath: atIndexPath))!)
+            return ((self.delegate?.htgkScrollView?(self, flowLayout: flowLayout, fixedLength: fixedLength, atIndexPath: atIndexPath))!)
         } else {
             return CGFloat.zero
         }

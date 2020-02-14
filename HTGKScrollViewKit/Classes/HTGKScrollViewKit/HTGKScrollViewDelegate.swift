@@ -9,17 +9,17 @@
 import UIKit
 
 @objc public protocol HTGKScrollViewDelegate: NSObjectProtocol {
+    
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int)
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int)
-    @objc optional func htgkScrollViewDidScroll(_ scrollView: HTGKScrollView, atScrollView: UIScrollView)
-    @objc optional func htgkScrollView(flowLayout: HTGKFlowLayout, updateHeightForWidth: CGFloat, atIndexPath: IndexPath) -> CGFloat
-
+    @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didScrollAtScrollView: UIScrollView)
+    @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGFloat
+    
 }
 
 public protocol HTGKScrollViewDataSource: NSObjectProtocol {
     
     func numberOfRows(_ scrollView: HTGKScrollView) -> Int
     func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> UIView
-    
 
 }
