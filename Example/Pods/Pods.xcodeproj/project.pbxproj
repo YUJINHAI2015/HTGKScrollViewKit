@@ -11,6 +11,7 @@
 		07EF17B36BB2C1AA2479E1EFC7C5BE37 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21B4EB2CAC44390D976C65ABE1CE2F5 /* ConstraintOffsetTarget.swift */; };
 		0AD7C4C7D5F79CB2A052C29D419D8513 /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87F70E835D22459F492D40CB584A67 /* UILayoutSupport+Extensions.swift */; };
 		1DA4BDCD1CF0AFEEA7444B8B8ECC1CDC /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F812B71438F709C9BBB7D4B438DAA8B /* ConstraintMaker.swift */; };
+		247D6D2723F6745B000FDEF9 /* HTGKFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247D6D2623F6745B000FDEF9 /* HTGKFlowLayout.swift */; };
 		26773FDE0C52BA18FBEF7B8DA96DF650 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FE473E37EFB8571E729F9B375CE60E /* Foundation.framework */; };
 		26B3B97E0F5520BA68C36DD67C77B8E8 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = A156835F5B20B0DE5962C7DD63E2E761 /* Typealiases.swift */; };
 		28FBBBEA07810DE67369B3A472C09C85 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65BFCA0A21044C1C3E6F663BB5F9B48 /* ConstraintItem.swift */; };
@@ -100,6 +101,7 @@
 		1BA85F3D7C8DB385CE531CD6CB85D041 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C0D63CC9AE91AE7CEBEC73853E124FD /* HTGKScrollViewDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTGKScrollViewDelegate.swift; path = HTGKScrollViewKit/Classes/HTGKScrollViewKit/HTGKScrollViewDelegate.swift; sourceTree = "<group>"; };
 		1EDED477E50CE06967C8C166E5024C85 /* Pods-HTGKScrollViewKit_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HTGKScrollViewKit_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		247D6D2623F6745B000FDEF9 /* HTGKFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTGKFlowLayout.swift; path = HTGKScrollViewKit/Classes/HTGKScrollViewKit/HTGKFlowLayout.swift; sourceTree = "<group>"; };
 		25E34EF5671A453947A4DB0C58A03A48 /* SnapKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.xcconfig; sourceTree = "<group>"; };
 		25F38FA5E44D80F234C35A924E16DEB8 /* HTGKScrollViewKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HTGKScrollViewKit-Info.plist"; sourceTree = "<group>"; };
 		2AB05D22C92E5A571A653D510E552AC0 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Source/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				9EC8DB3D16E473B2AD666427C8E97665 /* HTGKScrollView.swift */,
+				247D6D2623F6745B000FDEF9 /* HTGKFlowLayout.swift */,
 				5A83E8C436E7B8C8655F506DFF4314A2 /* HTGKScrollViewConfigure.swift */,
 				1C0D63CC9AE91AE7CEBEC73853E124FD /* HTGKScrollViewDelegate.swift */,
 				BD37289084F46421599BE0771CB7F532 /* Pod */,
@@ -639,6 +642,7 @@
 				65F0776284906DC5FE3319C342492601 /* HTGKScrollViewConfigure.swift in Sources */,
 				91E15709EB5AD8C131B142B00CF989AE /* HTGKScrollViewDelegate.swift in Sources */,
 				B96DBB7BD0D4B4B4B0DD28EDFB8A4D1C /* HTGKScrollViewKit-dummy.m in Sources */,
+				247D6D2723F6745B000FDEF9 /* HTGKFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

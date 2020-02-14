@@ -24,6 +24,7 @@ public class HTGKScrollView: UIView {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isPagingEnabled = false
+        collectionView.isDirectionalLockEnabled = true
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: HTGKScrollView.HTGKScrollViewCellIdentifier)
         return collectionView
     }()
@@ -33,25 +34,41 @@ public class HTGKScrollView: UIView {
 
     private lazy var collectionFlowLayout: UICollectionViewFlowLayout! = {
 
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = configure.lineSpacing // 行间距
-        layout.minimumInteritemSpacing = configure.interitemSpacing // 列间距
-        layout.scrollDirection = configure.scrollViewDirection == ScrollViewDirection.vertical ? .vertical : .horizontal
-        layout.sectionInset = configure.edgeInsets
-        
-        if #available(iOS 10.0, *) {
-            layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        } else {
-            layout.estimatedItemSize = CGSize.zero
+        if configure.scrollViewLayout == .custom {
+            let layout = HTGKFlowLayout()
+            layout.minimumLineSpacing = configure.lineSpacing // 行间距
+            layout.minimumInteritemSpacing = configure.interitemSpacing // 列间距
+            layout.scrollDirection = configure.scrollViewDirection == ScrollViewDirection.vertical ? .vertical : .horizontal
+            layout.sectionInset = configure.edgeInsets
+            layout.columnCount = configure.columnCount
+            
+            layout.delegate = self
+            return layout
+
+        }else {
+            let layout = UICollectionViewFlowLayout()
+            layout.minimumLineSpacing = configure.lineSpacing // 行间距
+            layout.minimumInteritemSpacing = configure.interitemSpacing // 列间距
+            layout.scrollDirection = configure.scrollViewDirection == ScrollViewDirection.vertical ? .vertical : .horizontal
+            layout.sectionInset = configure.edgeInsets
+
+            if #available(iOS 10.0, *) {
+                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            } else {
+                layout.estimatedItemSize = CGSize.zero
+            }
+            return layout
         }
-        return layout
     }()
+    
+    
     // func
     public init(_ configure: HTGKScrollViewConfigure? = nil) {
         super.init(frame: .zero)
         self.configure = configure ?? HTGKScrollViewConfigure()
         self.addSubview(self.collectionView)
         self.initUI()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -134,6 +151,20 @@ extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
         self.delegate?.htgkScrollViewDidScroll?(self, atScrollView: scrollView)
     }
 }
+
+extension HTGKScrollView: HTGKFlowLayoutDelegate {
+    public func waterFlowLayout(flowLayout: HTGKFlowLayout, updateHeightForWidth: CGFloat, atIndexPath: IndexPath) -> CGFloat
+    {
+        
+        if configure.scrollViewLayout == .custom {
+            
+            return ((self.delegate?.htgkScrollView?(flowLayout: flowLayout, updateHeightForWidth: updateHeightForWidth, atIndexPath: atIndexPath))!)
+        } else {
+            return CGFloat.zero
+        }
+    }
+}
+
 extension HTGKScrollView: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
