@@ -32,33 +32,25 @@ public class HTGKScrollView: UIView {
     private var configure: HTGKScrollViewConfigure = HTGKScrollViewConfigure()
     private static let HTGKScrollViewCellIdentifier = "HTGKScrollViewCellIdentifier"
 
+    public var customCellIdentifier = HTGKScrollView.HTGKScrollViewCellIdentifier {
+        didSet {
+            let moduleName = Bundle.main.infoDictionary!["CFBundleName"] as! String
+            let personClass: AnyClass? = NSClassFromString(moduleName + "." + customCellIdentifier)
+            
+            collectionView.register(personClass.self, forCellWithReuseIdentifier: customCellIdentifier)
+        }
+    }
+
     private lazy var collectionFlowLayout: UICollectionViewFlowLayout! = {
 
-        if configure.scrollViewLayout == .custom {
-            let layout = HTGKFlowLayout()
-            layout.minimumLineSpacing = configure.lineSpacing // 行间距
-            layout.minimumInteritemSpacing = configure.interitemSpacing // 列间距
-            layout.scrollDirection = configure.scrollViewDirection == .vertical ? .vertical : .horizontal
-            layout.sectionInset = configure.edgeInsets
-            layout.columnCount = configure.columnCount
-            
-            layout.delegate = self
-            return layout
-
-        }else {
-            let layout = UICollectionViewFlowLayout()
-            layout.minimumLineSpacing = configure.lineSpacing // 行间距
-            layout.minimumInteritemSpacing = configure.interitemSpacing // 列间距
-            layout.scrollDirection = configure.scrollViewDirection == .vertical ? .vertical : .horizontal
-            layout.sectionInset = configure.edgeInsets
-
-            if #available(iOS 10.0, *) {
-                layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            } else {
-                layout.estimatedItemSize = CGSize.zero
-            }
-            return layout
-        }
+        let layout = HTGKFlowLayout()
+        layout.minimumLineSpacing = configure.lineSpacing // 行间距
+        layout.minimumInteritemSpacing = configure.interitemSpacing // 列间距
+        layout.scrollDirection = configure.scrollViewDirection == .vertical ? .vertical : .horizontal
+        layout.sectionInset = configure.edgeInsets
+        layout.columnCount = configure.columnCount
+        layout.delegate = self
+        return layout
     }()
     
     
@@ -78,7 +70,9 @@ public class HTGKScrollView: UIView {
     public func reloadData() {
         self.collectionView.reloadData()
     }
-
+    public func invalidateLayout() {
+        self.collectionFlowLayout.invalidateLayout()
+    }
     public func reloadIndex(at indexs: [Int]) {
         let indexPaths = indexs.map {
             return IndexPath.init(row: $0, section: 0)
@@ -108,26 +102,38 @@ extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HTGKScrollView.HTGKScrollViewCellIdentifier, for: indexPath)
-        
-        if let view = self.datasource?.htgkScrollView(self, cellForRowAt: indexPath.row) {
-            cell.tag = indexPath.row
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapCell(recogniser:)))
-            cell.addGestureRecognizer(tap)
-                        
-            cell.subviews.forEach { (view) in
-                view.removeFromSuperview()
-            }
-            cell.addSubview(view)
-            if view.frame == CGRect.zero {
-                view.snp.makeConstraints { (make) in
-                    make.edges.equalToSuperview()
+        if self.customCellIdentifier == HTGKScrollView.HTGKScrollViewCellIdentifier {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HTGKScrollView.HTGKScrollViewCellIdentifier, for: indexPath)
+            
+            if let view = self.datasource?.htgkScrollView(self, cellForRowAt: indexPath) {
+                cell.tag = indexPath.row
+                let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapCell(recogniser:)))
+                cell.addGestureRecognizer(tap)
+                            
+                cell.subviews.forEach { (view) in
+                    view.removeFromSuperview()
+                }
+                cell.addSubview(view)
+                if view.frame == CGRect.zero {
+                    view.snp.makeConstraints { (make) in
+                        make.edges.equalToSuperview()
+                    }
                 }
             }
+            return cell
         }
-        return cell
+        else {
+            let cell = self.datasource?.htgkScrollView(self, cellForRowAt: indexPath)
+            return cell as! UICollectionViewCell
+        }
     }
-    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        if let _ = self.delegate?.responds(to: #selector(self.delegate?.htgkScrollView(_:didSelectRowAt:))) {
+            self.delegate?.htgkScrollView?(self, didSelectRowAt: indexPath.item)
+        }
+
+    }
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // 垂直
         var currentIndex: Int = 0
@@ -153,25 +159,14 @@ extension HTGKScrollView: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 extension HTGKScrollView: HTGKFlowLayoutDelegate {
-    public func waterFlowLayout(flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGFloat
+    public func waterFlowLayout(flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGSize
     {
         
         if configure.scrollViewLayout == .custom {
             
-            return ((self.delegate?.htgkScrollView?(self, flowLayout: flowLayout, fixedLength: fixedLength, atIndexPath: atIndexPath))!)
+            return ((self.delegate?.htgkScrollView(self, fixedLength: fixedLength, atIndexPath: atIndexPath))!)
         } else {
-            return CGFloat.zero
+            return CGSize.zero
         }
-    }
-}
-
-extension HTGKScrollView: UICollectionViewDelegateFlowLayout {
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        if let view = self.datasource?.htgkScrollView(self, cellForRowAt: indexPath.row),
-        view.frame != CGRect.zero {
-            return view.frame.size
-        }
-        return CGSize.init(width: 0.01, height: 0.01)
     }
 }

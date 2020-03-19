@@ -8,7 +8,7 @@
 import UIKit
 
 public protocol HTGKFlowLayoutDelegate: NSObjectProtocol {
-    func waterFlowLayout(flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGFloat
+    func waterFlowLayout(flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGSize
 }
 
 public class HTGKFlowLayout: UICollectionViewFlowLayout {
@@ -22,6 +22,8 @@ public class HTGKFlowLayout: UICollectionViewFlowLayout {
     // 每一列的UICollectionViewLayoutAttributes
     public var attrsArray: [UICollectionViewLayoutAttributes] = []
     
+    private lazy var cachedItemSizes = [IndexPath: CGSize]()
+
     override init() {
         super.init()
         
@@ -83,7 +85,24 @@ public class HTGKFlowLayout: UICollectionViewFlowLayout {
     override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
-    
+    override public func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
+
+        return cachedItemSizes[originalAttributes.indexPath] != preferredAttributes.size
+    }
+       override public func invalidationContext(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutInvalidationContext {
+           let context = super.invalidationContext(forPreferredLayoutAttributes: preferredAttributes, withOriginalAttributes: originalAttributes)
+
+           guard let _ = collectionView else { return context }
+
+           let oldContentSize = self.collectionViewContentSize
+           cachedItemSizes[originalAttributes.indexPath] = preferredAttributes.size
+           let newContentSize = self.collectionViewContentSize
+           context.contentSizeAdjustment = CGSize(width: 0, height: newContentSize.height - oldContentSize.height)
+
+           _ = context.invalidateEverything
+           return context
+       }
+
     // 4、布局每一个属性
     override public func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         // 找出最短的一列
@@ -101,8 +120,10 @@ public class HTGKFlowLayout: UICollectionViewFlowLayout {
             let insert: CGFloat = self.sectionInset.left + self.sectionInset.right // 行外间距
             
             let width: CGFloat = (totalWidth - margin - insert) / CGFloat(self.columnCount) // 每一个item宽度
-            let height: CGFloat = (self.delegate?.waterFlowLayout(flowLayout: self, fixedLength: width, atIndexPath: indexPath))!
+            let height: CGFloat = (self.delegate?.waterFlowLayout(flowLayout: self, fixedLength: width, atIndexPath: indexPath))!.height
             
+            cachedItemSizes[indexPath] = CGSize.init(width: width, height: height)
+
             //计算每一个item
             let x: CGFloat = self.sectionInset.left + (width + self.minimumLineSpacing) * CGFloat(minColumn)
             var y: CGFloat = 0
@@ -127,8 +148,9 @@ public class HTGKFlowLayout: UICollectionViewFlowLayout {
             let insert: CGFloat = self.sectionInset.top + self.sectionInset.bottom
             
             let height: CGFloat = (totalHeight - margin - insert) / CGFloat(self.columnCount)
-            let width: CGFloat = (self.delegate?.waterFlowLayout(flowLayout: self, fixedLength: height, atIndexPath: indexPath))!
+            let width: CGFloat = (self.delegate?.waterFlowLayout(flowLayout: self, fixedLength: height, atIndexPath: indexPath))!.width
             
+            cachedItemSizes[indexPath] = CGSize.init(width: width, height: height)
             //计算每一个item
             let y: CGFloat = self.sectionInset.top + (height + self.minimumInteritemSpacing) * CGFloat(minColumn)
             var x: CGFloat = 0

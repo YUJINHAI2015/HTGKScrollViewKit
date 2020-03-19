@@ -10,25 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    lazy var htgkScrollView: HTGKScrollView = {
-        
+    private lazy var htgkScrollView: HTGKScrollView = {
         var configure = HTGKScrollViewConfigure()
-        configure.lineSpacing = 10
-        configure.interitemSpacing = 10
-//        configure.edgeInsets = UIEdgeInsets.init(top: 10, left: 0, bottom: 10, right: 0)
-//        configure.scrollViewDirection = .vertical
-        configure.columnCount = 1
+        configure.lineSpacing = 8
+        configure.interitemSpacing = 8
+        configure.scrollViewDirection = .vertical
+        configure.edgeInsets = UIEdgeInsets.init(top: 12, left: 10, bottom: 12, right: 10)
         configure.scrollViewLayout = .custom
+        configure.columnCount = 2
+
         let scrollView = HTGKScrollView.init(configure)
-//        scrollView.frame = CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 200)
         scrollView.delegate = self
         scrollView.datasource = self
-        scrollView.collectionView.isScrollEnabled = true
         scrollView.backgroundColor = .red
+        scrollView.customCellIdentifier = "CustomCollectionViewCell"
         return scrollView
     }()
 
-    var imageNames: [String] = ["1","2","3","4","5","6","3","4","5","6","1","2","3"]
+    var imageNames: [String] = ["1","2","3","4","5","6","3","4","5","6","1","2","3","3","4","5","6","1","2","3"]
+    var reload: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,36 +39,40 @@ class ViewController: UIViewController {
             make.top.equalTo(40)
         }
     }
-
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-////        self.htgkScrollView.reloadData()
-//        self.htgkScrollView.reloadIndex(at: [0])
-//    }
 }
 extension ViewController: HTGKScrollViewDelegate, HTGKScrollViewDataSource {
-    func htgkScrollView(_ scrollView: HTGKScrollView, flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGFloat {
+    func htgkScrollView(_ scrollView: HTGKScrollView, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGSize {
+        
         let image = UIImage.init(named: imageNames[atIndexPath.row])
 
         let height = (image?.size.height)! * (fixedLength/(image?.size.width)!)
-        return height
+        if self.reload {
+            return CGSize.init(width: fixedLength, height: height + 30)
+        }
+
+        return CGSize.init(width: fixedLength, height: height)
+        
     }
-    
     
     func numberOfRows(_ scrollView: HTGKScrollView) -> Int {
         return imageNames.count
     }
-    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> UIView {
+    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt indexPath: IndexPath) -> UIView {
         
-        let view: MyView = MyView()
-        
-        view.updateValue(name: imageNames[index], index: "\(index)")
-
-        view.backgroundColor = .blue
-        return view
+        let cell = scrollView.collectionView.dequeueReusableCell(withReuseIdentifier: scrollView.customCellIdentifier, for: indexPath) as! CustomCollectionViewCell
+        cell.backgroundColor = .green
+        cell.setImageValue(name:imageNames[indexPath.row])
+        return cell
     }
 
     func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int) {
         print(index)
+    }
+    
+    func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int) {
+        print(index)
+        self.reload = true
+        self.htgkScrollView.invalidateLayout()
     }
 }
 

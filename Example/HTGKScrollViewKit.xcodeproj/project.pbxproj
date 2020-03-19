@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CA9CF1008B3D62DA0D688F5 /* Pods_HTGKScrollViewKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29E6069727E4BF68023C51AC /* Pods_HTGKScrollViewKit_Tests.framework */; };
+		240527B2242319ED00CDE24E /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240527B1242319ED00CDE24E /* CustomCollectionViewCell.swift */; };
 		242FF1B522D056D3006C40F3 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242FF1B422D056D3006C40F3 /* MyView.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		1B5ECE6194A8C0BD1EB5E96C /* Pods-HTGKScrollViewKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HTGKScrollViewKit_Example.release.xcconfig"; path = "Target Support Files/Pods-HTGKScrollViewKit_Example/Pods-HTGKScrollViewKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		22BB81BE47A49DF2F331D2B6 /* Pods-HTGKScrollViewKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HTGKScrollViewKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-HTGKScrollViewKit_Tests/Pods-HTGKScrollViewKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		240527B1242319ED00CDE24E /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		242FF1B422D056D3006C40F3 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		276A6B3F8D043EF9F35AA060 /* Pods-HTGKScrollViewKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HTGKScrollViewKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HTGKScrollViewKit_Tests/Pods-HTGKScrollViewKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		29E6069727E4BF68023C51AC /* Pods_HTGKScrollViewKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HTGKScrollViewKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,7 @@
 			children = (
 				242FF1B422D056D3006C40F3 /* MyView.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				240527B1242319ED00CDE24E /* CustomCollectionViewCell.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -319,6 +322,7 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				242FF1B522D056D3006C40F3 /* MyView.swift in Sources */,
+				240527B2242319ED00CDE24E /* CustomCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

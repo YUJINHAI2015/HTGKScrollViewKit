@@ -13,13 +13,13 @@ import UIKit
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectRowAt index: Int)
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didSelectPageAt index: Int)
     @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, didScrollAtScrollView: UIScrollView)
-    @objc optional func htgkScrollView(_ scrollView: HTGKScrollView, flowLayout: HTGKFlowLayout, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGFloat
+    @objc func htgkScrollView(_ scrollView: HTGKScrollView, fixedLength: CGFloat, atIndexPath: IndexPath) -> CGSize
     
 }
 
 public protocol HTGKScrollViewDataSource: NSObjectProtocol {
     
     func numberOfRows(_ scrollView: HTGKScrollView) -> Int
-    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt index: Int) -> UIView
+    func htgkScrollView(_ scrollView: HTGKScrollView, cellForRowAt indexPath: IndexPath) -> UIView
 
 }
