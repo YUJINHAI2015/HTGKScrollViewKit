@@ -85,23 +85,6 @@ public class HTGKFlowLayout: UICollectionViewFlowLayout {
     override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
-    override public func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
-
-        return cachedItemSizes[originalAttributes.indexPath] != preferredAttributes.size
-    }
-       override public func invalidationContext(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutInvalidationContext {
-           let context = super.invalidationContext(forPreferredLayoutAttributes: preferredAttributes, withOriginalAttributes: originalAttributes)
-
-           guard let _ = collectionView else { return context }
-
-           let oldContentSize = self.collectionViewContentSize
-           cachedItemSizes[originalAttributes.indexPath] = preferredAttributes.size
-           let newContentSize = self.collectionViewContentSize
-           context.contentSizeAdjustment = CGSize(width: 0, height: newContentSize.height - oldContentSize.height)
-
-           _ = context.invalidateEverything
-           return context
-       }
 
     // 4、布局每一个属性
     override public func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
